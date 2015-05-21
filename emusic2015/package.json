@@ -1,0 +1,19 @@
+{
+  "name": "html5_slides",
+  "version": "0.1.0",
+  "author": "chengs",
+  "devDependencies": {
+    "del": "*",
+    "gulp": "^3.8.11",
+    "gulp-csso": "*",
+    "gulp-gm": "*",
+    "gulp-htmlmin": "*",
+    "gulp-imagemin": "*",
+    "gulp-jade": "*",
+    "gulp-less": "*",
+    "gulp-rename": "*",
+    "gulp-to-json": "*",
+    "gulp-uglify": "*",
+    "marked": "^0.3.3"
+  }
+}
