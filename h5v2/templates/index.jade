@@ -1,0 +1,78 @@
+doctype html
+html
+    head
+        title Slide
+        script(src="swiper/idangerous.swiper.min.js")
+        link(rel="stylesheet",href="swiper/idangerous.swiper.css")
+        style(type='text/css').
+                .swiper-container{
+                    width: 100%;
+                    height: 100%;
+                    color: #fff;
+                    text-align: center;
+                }
+                .swiper-slide{
+                    background-size: 100% !important;
+                }
+                body{
+                    height:100%;
+                    margin:0;
+                    padding:0;
+                }
+                html{
+                    height:100%;
+                }
+                .music{
+                    width: 120px;
+                    height: 120px;
+                    text-align: center;
+                    background: url(images/on.png);
+                    background-size: 100%;
+                    position: fixed;
+                    bottom: 30px;
+                    right: 30px;
+                    z-index: 100;
+                    float: left;
+                }
+
+                .off{
+                    background-image: url(images/off.png) !important;
+                }
+    body
+        div.swiper-container
+            div#wrapper.swiper-wrapper
+                each slide in slides
+                    div.swiper-slide(style="background: url(slides_min/"+slide+") no-repeat center center")
+        audio#audio(loop="loop")
+            source(src="music.mp3",type="audio/mpeg")
+            source(src="music.ogg",type="audio/ogg")
+        div#music.off
+        script(src="zepto.min.js")
+        script.
+            window.onload = function() {
+                var mySwiper = new Swiper('.swiper-container', {
+                    //Your options here:
+                    mode: 'vertical',
+                    loop: false
+                    //etc..
+                });
+            };
+            $(document).ready(function(){
+                var audio = $('#audio');
+                var music = $('#music');
+                $('#wrapper').one('swipe',function(){
+                    music.addClass('music');
+                    music.on('tap',function(){
+                        if(music.hasClass('off')){
+                            //Stop music
+                            music.removeClass('off');
+                            audio[0].pause();
+                        }else{
+                            //play music
+                            music.addClass('off');
+                            audio[0].play();
+                        }
+                    });
+                    audio[0].play();
+                });
+            })
