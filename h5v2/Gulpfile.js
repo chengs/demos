@@ -12,15 +12,17 @@ var toJson = require('gulp-to-json');
 
 
 gulp.task('tojson',function(){
-   	return gulp.src('slides_min/*.png').pipe(toJson({
+   	return gulp.src('slides_min/*.jpg').pipe(toJson({
    		relative:true
     }));
 })
 
 
 gulp.task('image',function(){
-	return gulp.src("slides/*.png")
-		.pipe(imagemin({}))
+	return gulp.src("slides/*.jpg")
+		.pipe(imagemin({
+			progressive:true
+		}))
         .pipe(gulp.dest('./slides_min'));
 });
 
