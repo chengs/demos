@@ -76,3 +76,16 @@ html
                     audio[0].play();
                 });
             })
+            if(wx){
+                wx.onMenuShareTimeline({
+                    title: 'Magic City',
+                    link: window.location.href,
+                    imgUrl: window.location.href.replace('index.html','icon.png')
+                });
+                wx.onMenuShareAppMessage({
+                    title: 'Magic City',
+                    desc: 'Author: 彭艺扬',
+                    link: window.location.href,
+                    imgUrl: window.location.href.replace('index.html','icon.png')
+                });
+            }
