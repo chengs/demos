@@ -2,6 +2,8 @@ doctype html
 html
     head
         title Magic City
+        meta(http-equiv="X-UA-Compatible",content="IE=edge")
+        meta(name="viewport",content="width=device-width, initial-scale=1")
         script(src="swiper/idangerous.swiper.min.js")
         link(rel="stylesheet",href="swiper/idangerous.swiper.css")
         style(type='text/css').
@@ -76,16 +78,3 @@ html
                     audio[0].play();
                 });
             })
-            if(wx){
-                wx.onMenuShareTimeline({
-                    title: 'Magic City',
-                    link: window.location.href,
-                    imgUrl: window.location.href.replace('index.html','icon.png')
-                });
-                wx.onMenuShareAppMessage({
-                    title: 'Magic City',
-                    desc: 'Author: 彭艺扬',
-                    link: window.location.href,
-                    imgUrl: window.location.href.replace('index.html','icon.png')
-                });
-            }
