@@ -27,9 +27,10 @@ html{
     z-index: 100;
     float: left;
 }
+
 .off{
     background-image: url(images/off.png) !important;
-}</style></head><body><img src="./logo.png" style="position:absolute;top:-1000px;left:-1000px;"><div class="swiper-container"><div id="wrapper" class="swiper-wrapper"><div style="background: url(slides_min/s.001.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.002.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.003.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.004.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.005.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.006.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.007.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.008.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.009.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.010.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.011.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.012.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.013.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.014.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.015.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.016.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.017.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.018.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.019.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.020.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.021.jpg) no-repeat center center" class="swiper-slide"></div></div></div><audio id="audio" loop="loop"><source src="music.mp3" type="audio/mpeg"><source src="music.ogg" type="audio/ogg"></audio><div id="music" class="off"></div><script src="swiper/idangerous.swiper.min.js"></script><script src="zepto.min.js"></script><script>window.onload = function() {
+}</style></head><body><div class="swiper-container"><div id="wrapper" class="swiper-wrapper"><div style="background: url(slides_min/s.001.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.002.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.003.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.004.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.005.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.006.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.007.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.008.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.009.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.010.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.011.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.012.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.013.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.014.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.015.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.016.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.017.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.018.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.019.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.020.jpg) no-repeat center center" class="swiper-slide"></div><div style="background: url(slides_min/s.021.jpg) no-repeat center center" class="swiper-slide"></div></div></div><audio id="audio" loop="loop"><source src="music.mp3" type="audio/mpeg"><source src="music.ogg" type="audio/ogg"></audio><div id="music" class="off"></div><script src="swiper/idangerous.swiper.min.js"></script><script src="zepto.min.js"></script><script>window.onload = function() {
     var mySwiper = new Swiper('.swiper-container', {
         //Your options here:
         mode: 'vertical',
@@ -55,4 +56,43 @@ $(document).ready(function(){
         });
         audio[0].play();
     });
-})</script></body></html>
+})
+
+
+var share_basic = {
+    appid:'',
+    img_url: window.location.href.replace("index.html","logo.png"),
+    img_width:"286",
+    img_height:"284",
+    link: window.location.href,
+    desc:'by 彭艺扬',
+    title:'Magic City'
+}
+
+
+function shareFriend() {
+    var share = $.extend({},share_basic,window.share);
+    WeixinJSBridge.invoke('sendAppMessage',share, function(res) {
+        _report('send_msg', res.err_msg);
+    })
+}
+function shareTimeline() {
+    var share = $.extend({},share_basic,window.share);
+    share.title = '['+share.title+']'+share.desc;
+    WeixinJSBridge.invoke('shareTimeline',share, function(res) {
+        _report('timeline', res.err_msg);
+    });
+}
+// 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+
+    // 发送给好友
+    WeixinJSBridge.on('menu:share:appmessage', function(argv){
+        shareFriend();
+    });
+
+    // 分享到朋友圈
+    WeixinJSBridge.on('menu:share:timeline', function(argv){
+        shareTimeline();
+    });
+}, false);</script></body></html>
