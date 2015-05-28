@@ -36,11 +36,11 @@ html
                     z-index: 100;
                     float: left;
                 }
-
                 .off{
                     background-image: url(images/off.png) !important;
                 }
     body
+        img(src="./logo.png",style="position:absolute;top:-1000px;left:-1000px;")
         div.swiper-container
             div#wrapper.swiper-wrapper
                 each slide in slides
@@ -79,42 +79,3 @@ html
                     audio[0].play();
                 });
             })
-
-
-            var share_basic = {
-                appid:'',
-                img_url: window.location.href.replace("index.html","logo.png"),
-                img_width:"286",
-                img_height:"284",
-                link: window.location.href,
-                desc:'by 彭艺扬',
-                title:'Magic City'
-            }
-
-
-            function shareFriend() {
-                var share = $.extend({},share_basic,window.share);
-                WeixinJSBridge.invoke('sendAppMessage',share, function(res) {
-                    _report('send_msg', res.err_msg);
-                })
-            }
-            function shareTimeline() {
-                var share = $.extend({},share_basic,window.share);
-                share.title = '['+share.title+']'+share.desc;
-                WeixinJSBridge.invoke('shareTimeline',share, function(res) {
-                    _report('timeline', res.err_msg);
-                });
-            }
-            // 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
-            document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-
-                // 发送给好友
-                WeixinJSBridge.on('menu:share:appmessage', function(argv){
-                    shareFriend();
-                });
-
-                // 分享到朋友圈
-                WeixinJSBridge.on('menu:share:timeline', function(argv){
-                    shareTimeline();
-                });
-            }, false);
