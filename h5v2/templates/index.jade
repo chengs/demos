@@ -25,8 +25,8 @@ html
                     height:100%;
                 }
                 .music{
-                    width: 120px;
-                    height: 120px;
+                    width: 40px;
+                    height: 40px;
                     text-align: center;
                     background: url(images/on.png);
                     background-size: 100%;
@@ -44,7 +44,7 @@ html
         div.swiper-container
             div#wrapper.swiper-wrapper
                 each slide in slides
-                    div.swiper-slide(style="background: url(slides_min/"+slide+") no-repeat center 0")
+                    div.swiper-slide(style="background: url(slides_min/"+slide+") no-repeat center center")
         audio#audio(loop="loop")
             source(src="music.mp3",type="audio/mpeg")
             source(src="music.ogg",type="audio/ogg")
