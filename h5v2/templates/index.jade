@@ -2,9 +2,9 @@ doctype html
 html
     head
         title Magic City
+        meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible",content="IE=edge")
         meta(name="viewport",content="width=device-width, initial-scale=1")
-        script(src="swiper/idangerous.swiper.min.js")
         link(rel="stylesheet",href="swiper/idangerous.swiper.css")
         style(type='text/css').
                 .swiper-container{
@@ -49,6 +49,7 @@ html
             source(src="music.mp3",type="audio/mpeg")
             source(src="music.ogg",type="audio/ogg")
         div#music.off
+        script(src="swiper/idangerous.swiper.min.js")
         script(src="zepto.min.js")
         script.
             window.onload = function() {
