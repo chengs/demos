@@ -17,6 +17,11 @@ gulp.task('image',function(){
         .pipe(gulp.dest('assets/img'));
 });
 
+gulp.task('temp',function  () {
+	return gulp.src('images/*')
+		.pipe(imagemin({}))
+		.pipe(gulp.dest('images_min'))
+})
 
 
 gulp.task('less',function(){
