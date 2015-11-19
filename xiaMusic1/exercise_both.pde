@@ -21,8 +21,8 @@ void draw() {
   if (fs.isFlower) {
     speed = random(0.01, 1);
     angle = random(360);
-    distance = 0.05;
-    fs.addParticle(mouseX, mouseY, 5, random(-0.05, 0.05), random(-0.01, 0.01), distance * cos(radians(angle)), distance * sin(radians(angle)));//random(-0.01, 0.01), random(-0.01, 0.01));
+    distance = 0.005;
+    fs.addParticle(mouseX, mouseY, 5, random(-0.01, 0.01), random(-0.01, 0.01), distance * cos(radians(angle)), distance * sin(radians(angle)));//random(-0.01, 0.01), random(-0.01, 0.01));
     fs.run();
     fs.update();
   }
