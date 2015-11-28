@@ -1,6 +1,6 @@
 //connect to room
-var appId = '87By7Ck3mJSmn2Bjz3FlUpNU';
-var roomId = '5648a9f400b0814da5103b68';
+var appId = 'AyW11ncR4mOBfzb8r8GsE9uY';
+var roomId = '5659bc8460b24d2f52fa964a';
 // 每个客户端自定义的 id
 var clientId = 'USER'+Math.random().toString();
 // 用来存储 realtimeObject
@@ -16,7 +16,8 @@ function boot(){
   rt = AV.realtime({
     appId: appId,
     clientId: clientId,
-    secure: false
+    secure: false,
+    region:'us'
   });
 
   // 监听服务情况
@@ -68,45 +69,70 @@ function boot(){
 
 boot();
 
-//send Event to the server
-function sendEvent(name,option) {
-  // body...
-  if (!firstFlag && room){
+//send Events
+events = []
+// eventInterval = 500; //in ms
+function sendEvents(){
+  var es = events;
+  events = [];
+  if ( !firstFlag && room && es.length > 0){
     room.send({
-      name:name,
-      option:option
+      events:es
     },function(data){
       //callback
+      console.log(data)
     })
   }
-  // console.log(name,option)
+}
+// setInterval(sendEvents,eventInterval)
+
+//send Event to the server
+function sendEvent(name,option) {
+  //only pack
+  // body...
+  events.push({
+    name:name,
+    option:option,
+    at:Date.now()
+  })
 }
 
 //catch Events
 var areaId = "#touch"
 $(areaId).on('mousedown',function(e){
-  sendEvent('down',{
-    x:e.pageX,
-    y:e.pageY
-  })
-  return true
+  // sendEvent('down',{
+  //   x:e.pageX,
+  //   y:e.pageY
+  // })
+  // return true
 }).on('mouseup',function(e){
-  sendEvent('up',{
-    x:e.pageX,
-    y:e.pageY
-  })
-  return true
+  // sendEvent('up',{
+  //   x:e.pageX,
+  //   y:e.pageY
+  // })
+  // return true
+}).on('mousedrag',function(e){
+  // sendEvent('move',{
+  //   x:e.pageX,
+  //   y:e.pageY
+  // })
+  // return true
 }).on('touchstart',function(e){
-  sendEvent('down',{
-    x:e.originalEvent.touches[0].pageX,
-    y:e.originalEvent.touches[0].pageY
-  })
-  return true
+  // sendEvent('down',{
+  //   x:e.originalEvent.touches[0].pageX,
+  //   y:e.originalEvent.touches[0].pageY
+  // })
+  // return true
 }).on('touchend',function(e){
-  console.log(e)
-  sendEvent('up',{
-    x:e.originalEvent.changedTouches[0].pageX,
-    y:e.originalEvent.changedTouches[0].pageY
-  })
-  return true
+  // sendEvent('up',{
+  //   x:e.originalEvent.changedTouches[0].pageX,
+  //   y:e.originalEvent.changedTouches[0].pageY
+  // })
+  // return true
+}).on('touchmove',function(e){
+  // sendEvent('move',{
+  //   x:e.originalEvent.touches[0].pageX,
+  //   y:e.originalEvent.touches[0].pageY
+  // })
+  // return true
 })

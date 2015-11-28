@@ -3,11 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title>GuaiGuai Server</title>
+    <style media="screen">
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #touch {
+        width: 100%;
+        height: 100%;
+        /*background-color: red;*/
+      }
+    </style>
   </head>
   <body>
-    <div class="" id="log"></div>
+    <!-- <div class="" id="log"></div> -->
     <script charset="utf-8" src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script charset="utf-8" src="../bower_components/leancloud-realtime/dist/AV.realtime.js"></script>
+    <script charset="utf-8" src="../bower_components/Processing.js/processing.js"></script>
     <script charset="utf-8" src="./script.js"></script>
+
+    <canvas class="" id="touch" data-processing-sources="../processing/core.pde ../processing/monitor.pde"></canvas>
   </body>
 </html>

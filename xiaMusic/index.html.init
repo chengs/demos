@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script charset="utf-8" src="../bower_components/leancloud-realtime/dist/AV.realtime.js"></script>
+    <script>
+      //connect to room
+      var appId = 'AyW11ncR4mOBfzb8r8GsE9uY';
+      var roomId = '5659bc8460b24d2f52fa964a';
+      var clientId = 'begin';
+      var rt = AV.realtime({
+        appId: appId,
+        clientId: clientId,
+        secure: false,
+        region:'us'
+      });
+      rt.on('open', function() {
+        var room = rt.room({
+            // 成员列表
+            members: [
+                'LeanCloud02'
+            ],
+            // 默认名字
+            name: 'xiaMusic',
+            // 默认的属性，可以放 Conversation 的一些初始值等
+            attr: {
+                test: 'testTitle'
+            }
+        }, function(result) {
+            console.log('Room created callback');
+        });
+      });
+    </script>
+  </body>
+</html>
