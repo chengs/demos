@@ -13,16 +13,16 @@ function setup() {
     delay.disconnect();
     delaytime = 0.5;
     delay.delayTime(delaytime);
+    delay.feedback(0.4);
 
     volume = new p5.Gain();
     volume.disconnect();
     volume.amp(0.8);
     oscVolume = new p5.Gain();
     oscVolume.disconnect();
-    oscVolume.amp(1);
+    oscVolume.amp(0);
     feedbackGain = new p5.Gain();
-    feedbackGain.disconnect();
-    feedbackGain.amp(0.4);
+    feedbackGain.amp(1);
 
     compressor = getAudioContext().createDynamicsCompressor();
     compressor.disconnect();
@@ -48,16 +48,18 @@ function getFilterFreq(y) {
 }
 
 function startOsc() {
-    volume.connect(getAudioContext().destination)
-        // volume.amp(0.5, 1);
+    oscVolume.amp(1.0);
+    // volume.connect();
+    // volume.amp(0.5, 1);
 }
 
 function stopOsc() {
+    oscVolume.amp(0);
+    // volume.disconnect();
     // feedbackGain.amp(0, 0.4);
     // delay.disconnect();
     // volume.amp(0, 0.4);
     // volume.disconnect();
-    volume.disconnect()
 }
 
 function routeSound() {
@@ -69,6 +71,7 @@ function routeSound() {
     delay.connect(compressor);
     feedbackGain.connect(delay);
     compressor.connect(volume);
+    volume.connect(getAudioContext().destination);
     // volume.connect(getAudioContext().destination); //destination
     // source.connect(filter);
     // filter.connect(volume);
